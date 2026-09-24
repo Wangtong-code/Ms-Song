@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宋云姐姐 中秋祝福</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif;}
+body{
+  min-height:100vh;
+  background:#0f0f23;
+  overflow:hidden;
+}
+.popup{
+  position:absolute;
+  padding:12px 10px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  width:300px;
+  min-height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:14px;
+  z-index:9999;
+  animation: popIn 0.3s ease-out;
+}
+@keyframes popIn{
+  from{transform:scale(0.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+</style>
+</head>
+<body>
+<script>
+// 你的全部祝福语，原样复制过来
+const tips = [
+  '天天开心~', '保持微笑呀', '每天都要元气满满',
+  '记得按时吃饭', '保持好心情', '好好爱自己', '我想你了',
+  '梦想成真', '期待下一次见面', '成为光',
+  '顺顺利利', '早点休息', '愿所有烦恼都消失',
+  '别熬夜', '今天过得开心嘛', '天冷了，多穿衣服',
+  '🌕宋云姐姐，中秋节快乐',
+  '白玫瑰与明月皆予你',
+  '花好月圆', '天天幸福',
+  '你很棒', '加油哦', '一切都会好起来的',
+  '月光载着温柔送给宋云姐姐',
+  '颗粒星光，白玫瑰相伴✨',
+  '相隔千里，也天天想你',
+  '所有努力都不会白费',
+  '姐姐，你温柔又耀眼',
+  '世间美好都配得上你',
+  '姐姐自带星光✨',
+  '白玫瑰般干净美好的宋老师',
+  '你是藏在月光里的浪漫',
+  '宋云姐姐永远闪闪发光',
+  '温柔本身说的就是宋云姐姐',
+  '宋云姐姐的笑容胜过月色',
+  '美好总会和你如约而至',
+  '宋云姐姐明媚又动人',
+  '所有温柔都奔向宋云姐姐',
+  '万事尽可期待',
+  '如白玫瑰清雅，如秋月温柔',
+  '姐姐，你是难得的美好',
+  '月色万里，不及宋云姐姐半分',
+  '宋云姐姐，永远被善意包围',
+  '姐姐眼里盛满温柔',
+  '秋风明月，献礼于你',
+  '愿姐姐年年中秋皆圆满',
+  '心中有光永不黯淡',
+  '你温柔且坚定，美好且自由',
+  '秋意温柔，好运常在',
+  '岁岁常欢愉，年年皆胜意',
+  '日子温柔闪闪发亮',
+  '所行化坦途，多喜乐长安宁',
+  '明月相伴，万事无忧',
+  '美好与幸运双向奔赴',
+  '宋云姐姐如白玫瑰般纯粹动人',
+  '永远热烈永远美好',
+  '秋风捎来我的满心祝福',
+  '平安喜乐，得偿所愿',
+  '姐姐，眼中有星河，心中有皓月',
+  '清风绕身，福气常伴',
+  '宋云姐姐像月光一样温润动人',
+  '好运持续在线✨',
+  '生活满是浪漫与惊喜',
+  '万事顺遂毫无蹉跎',
+  '被月光和温柔紧紧拥抱',
+  '往后日子闪闪发光',
+  '花开月圆好事将近',
+  '喜乐无忧，岁岁安康',
+  '姐姐，你是人间理想，温柔宝藏',
+  '秋月漫漫，福气满满',
+  '持热爱奔赴山海',
+  '所有美好向你奔赴而来',
+  '清风明月，喜乐安宁',
+  '岁岁中秋，事事圆满',
+  '愿你永远保有这份温柔',
+  '明月寄相思，祝福送给你',
+  '宋云姐姐，这一轮明月为你而亮',
+  '送君茉莉，愿君莫离',
+  '愿你平安常伴，喜乐无忧',
+  '宋云姐姐温柔撞入人间月色',
+  '期待下一次见面', 
+];
+
+const bgColors = [
+  'lightpink', 'skyblue', 'lightgreen', 'lavender',
+  'lightyellow', 'plum', 'coral', 'bisque', 'aquamarine',
+  'mistyrose', 'honeydew', 'lavenderblush', 'oldlace',
+];
+
+const popCount = 90;    //弹窗总数，和你原来一致
+const interval = 200;   //弹出间隔ms
+const popupLife = 10000;//弹窗10秒消失
+
+function createPopup(){
+  const msg = tips[Math.floor(Math.random() * tips.length)];
+  const color = bgColors[Math.floor(Math.random() * bgColors.length)];
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.style.background = color;
+  popup.innerText = msg;
+
+  //随机位置，适配手机屏幕
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const x = Math.floor(Math.random() * (w - 300));
+  const y = Math.floor(Math.random() * (h - 120));
+  popup.style.left = `${Math.max(0,x)}px`;
+  popup.style.top = `${Math.max(0,y)}px`;
+
+  document.body.appendChild(popup);
+  //10秒后移除
+  setTimeout(()=>{
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity 0.4s";
+    setTimeout(()=>popup.remove(),400);
+  }, popupLife);
+}
+
+//循环弹出
+let count = 0;
+function loopPop(){
+  if(count >= popCount) return;
+  createPopup();
+  count++;
+  setTimeout(loopPop, interval);
+}
+window.onload = loopPop;
+</script>
+</body>
+</html>
